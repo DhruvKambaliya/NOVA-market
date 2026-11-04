@@ -1,0 +1,292 @@
+/* NOVA Market — accessible live product search */
+.searchbox.searchbox-enhanced {
+    position: relative;
+    z-index: 45;
+    overflow: visible;
+    isolation: isolate;
+}
+
+.searchbox-enhanced > svg {
+    flex: 0 0 auto;
+}
+
+.searchbox-enhanced input {
+    min-width: 0;
+}
+
+.product-search-clear {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    display: inline-grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #827b70;
+    cursor: pointer;
+}
+.product-search-clear:hover,
+.product-search-clear:focus-visible {
+    outline: none;
+    background: #eae4d8;
+    color: #29251e;
+}
+
+.product-search-dropdown {
+    position: absolute;
+    top: calc(100% + 11px);
+    left: 0;
+    right: 0;
+    z-index: 120;
+    max-height: min(68vh, 520px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 10px;
+    border: 1px solid rgba(180, 151, 99, .35);
+    background: #fffefa;
+    color: #29251e;
+    box-shadow: 0 22px 55px rgba(0, 0, 0, .24), 0 4px 12px rgba(0, 0, 0, .08);
+    text-align: left;
+}
+
+.product-search-heading {
+    min-height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 2px 6px 8px;
+    color: #a17c40;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .13em;
+}
+.product-search-heading small {
+    color: #958d80;
+    font-size: 10px;
+    font-weight: 550;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.product-search-list {
+    display: grid;
+    gap: 3px;
+}
+.product-search-option {
+    width: 100%;
+    min-width: 0;
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 7px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #29251e;
+    text-align: left;
+    cursor: pointer;
+    transition: background .16s ease, border-color .16s ease;
+}
+.product-search-option:hover,
+.product-search-option.is-active,
+.product-search-option:focus-visible {
+    outline: none;
+    border-color: #e5d7bd;
+    background: #f6f0e5;
+}
+.product-search-option > img {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    object-fit: cover;
+    background: #eeeae2;
+}
+.product-search-option-copy {
+    min-width: 0;
+    flex: 1 1 auto;
+    display: grid;
+    gap: 4px;
+}
+.product-search-option-copy strong {
+    overflow: hidden;
+    color: #2c2923;
+    font-size: 12px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.product-search-option-copy small {
+    overflow: hidden;
+    color: #898174;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.product-search-price {
+    flex: 0 0 auto;
+    color: #947039;
+    font-size: 11px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.product-search-empty {
+    min-height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 18px;
+    color: #918879;
+    text-align: center;
+}
+.product-search-empty strong {
+    color: #39342c;
+    font-family: var(--serif, Georgia, serif);
+    font-size: 17px;
+    font-weight: 600;
+}
+.product-search-empty span {
+    font-size: 11px;
+}
+
+.product-search-footer {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 7px;
+    padding: 8px 6px 2px;
+    border-top: 1px solid #eee8dc;
+    color: #928a7d;
+    font-size: 9px;
+}
+.product-search-footer > span {
+    min-width: 0;
+}
+.product-search-footer button {
+    min-height: 30px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    border: 1px solid #d8c49d;
+    background: #f8f1e5;
+    color: #76572d;
+    font-size: 10px;
+    font-weight: 750;
+    cursor: pointer;
+}
+.product-search-footer button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+.product-search-hint kbd {
+    display: inline-block;
+    padding: 3px 6px;
+    border: 1px solid #e7e0d4;
+    background: #f7f4ee;
+    color: #837a6d;
+    font-size: 9px;
+}
+
+.product-search-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+.product-search-categories button {
+    min-width: 0;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    border: 1px solid #eee7da;
+    background: #fbf8f1;
+    color: #554b3c;
+    font-size: 10px;
+    font-weight: 650;
+    text-align: left;
+    cursor: pointer;
+}
+.product-search-categories button:hover,
+.product-search-categories button:focus-visible {
+    outline: none;
+    border-color: #c8a970;
+    background: #f5eddf;
+}
+.product-search-categories button > span {
+    color: #ae8b4f;
+    font-size: 15px;
+}
+.product-search-categories button > svg {
+    margin-left: auto;
+    flex: 0 0 auto;
+    color: #a98a55;
+}
+
+@media (max-width: 650px) {
+    .searchbox.searchbox-enhanced {
+        z-index: 55;
+    }
+    .product-search-dropdown {
+        top: calc(100% + 7px);
+        max-height: min(62vh, 460px);
+        padding: 8px;
+    }
+    .product-search-option {
+        min-height: 58px;
+        gap: 9px;
+        padding: 6px;
+    }
+    .product-search-option > img {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+    .product-search-option-copy strong { font-size: 11px; }
+    .product-search-option-copy small { font-size: 9px; }
+    .product-search-price { font-size: 10px; }
+    .product-search-footer { align-items: flex-start; }
+    .product-search-footer > span { line-height: 1.45; }
+}
+
+@media (max-width: 360px) {
+    .product-search-categories { grid-template-columns: 1fr; }
+    .product-search-footer { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-search-option { transition: none; }
+}
+
+/* Search dropdown stacking fix: keep the full topbar above the category row.
+   The storefront's 3D perspective on .topbar creates a stacking context, so
+   z-index on the search input alone cannot rise above the sibling nav. */
+.site-header {
+    position: sticky;
+    z-index: 90;
+    isolation: isolate;
+}
+.site-header > .topbar {
+    position: relative;
+    z-index: 91;
+    isolation: isolate;
+}
+.site-header > .topbar .searchbox.searchbox-enhanced {
+    position: relative;
+    z-index: 92;
+}
+.site-header > .topbar .product-search-dropdown {
+    z-index: 9999;
+}
+.site-header > .main-nav {
+    position: relative;
+    z-index: 1;
+}

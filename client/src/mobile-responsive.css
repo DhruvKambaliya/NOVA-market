@@ -1,0 +1,813 @@
+/* NOVA Market responsive finishing layer.
+   Loaded after the main theme and feature-specific styles. */
+
+:root {
+  --nova-mobile-gutter: clamp(14px, 4vw, 22px);
+  --nova-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+button,
+a,
+select,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+.button,
+.icon-button,
+.admin-nav-item,
+.main-nav button {
+  touch-action: manipulation;
+}
+
+/* Storefront navigation: the existing mobile menu button now opens this panel. */
+.admin-sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.admin-sidebar-close,
+.admin-menu-toggle,
+.admin-sidebar-backdrop {
+  display: none;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
+
+.table-scroll table {
+  width: max-content;
+  min-width: 100%;
+}
+
+.admin-main,
+.panel,
+.management-panel,
+.security-monitoring-panel,
+.customer-orders-panel,
+.product-section,
+.section {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  /* Storefront header and category drawer */
+  .topbar {
+    padding: 12px var(--nova-mobile-gutter);
+    gap: 9px;
+  }
+
+  .mobile-menu {
+    display: inline-flex;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 3px;
+  }
+
+  .mobile-menu svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .topbar > .wordmark {
+    margin-right: auto;
+  }
+
+  .header-actions {
+    flex: 0 0 auto;
+    gap: 3px;
+  }
+
+  .header-actions .icon-button {
+    width: 38px;
+    height: 40px;
+    justify-content: center;
+  }
+
+  .main-nav:not(.is-open) {
+    display: none;
+  }
+
+  .main-nav.is-open {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 4px 8px;
+    height: auto;
+    max-height: min(62svh, 470px);
+    padding: 10px var(--nova-mobile-gutter) 14px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    background: #171715;
+    overscroll-behavior: contain;
+  }
+
+  .main-nav.is-open button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
+    min-height: 43px;
+    height: auto;
+    padding: 10px 11px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 2px;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.35;
+    font-size: 11px;
+  }
+
+  .main-nav.is-open button.nav-active {
+    border-color: rgba(196, 160, 92, .55);
+    background: rgba(196, 160, 92, .12);
+  }
+
+  .main-nav.is-open .offers-link {
+    grid-column: 1 / -1;
+  }
+
+  /* Public landing, product catalogue and long-form story */
+  .hero h1 {
+    font-size: clamp(40px, 12.5vw, 53px);
+    overflow-wrap: normal;
+  }
+
+  .hero-copy,
+  .section,
+  .editorial-banners {
+    min-width: 0;
+  }
+
+  .section-heading {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .section-heading > * {
+    min-width: 0;
+  }
+
+  .category-card {
+    min-width: 0;
+  }
+
+  .product-card,
+  .product-info,
+  .product-name {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .price-row {
+    flex-wrap: wrap;
+  }
+
+  .newsletter form {
+    min-width: 0;
+  }
+
+  .newsletter input,
+  .newsletter button {
+    min-width: 0;
+  }
+
+  .footer-main,
+  .footer-bottom {
+    min-width: 0;
+  }
+
+  /* Admin navigation becomes a slide-in drawer instead of a cramped horizontal strip. */
+  .admin-shell.admin-workspace {
+    display: block;
+    min-height: 100svh;
+  }
+
+  .admin-workspace .admin-sidebar {
+    position: fixed;
+    z-index: 1401;
+    inset: 0 auto 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: min(310px, 88vw);
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: max(16px, env(safe-area-inset-top)) 15px max(16px, var(--nova-safe-bottom));
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #171715;
+    box-shadow: 20px 0 55px rgba(0, 0, 0, .28);
+    transform: translateX(-105%);
+    transition: transform .24s cubic-bezier(.2, .75, .2, 1);
+    overscroll-behavior: contain;
+  }
+
+  .admin-workspace.admin-sidebar-open .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  .admin-workspace .admin-sidebar-head {
+    min-height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .admin-workspace .admin-logo {
+    margin: 0 0 0 8px;
+    font-size: 27px;
+  }
+
+  .admin-workspace .admin-sidebar-close {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.15);
+    color: #f2eadb;
+  }
+
+  .admin-workspace .admin-label {
+    display: block;
+    margin: 0 10px 10px;
+  }
+
+  .admin-workspace .admin-nav-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 47px;
+    margin: 2px 0;
+    padding: 12px 11px;
+    white-space: normal;
+    font-size: 12px;
+  }
+
+  .admin-workspace .admin-nav-item svg {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .admin-workspace .sidebar-bottom {
+    display: block;
+    margin-top: auto;
+    padding-top: 16px;
+  }
+
+  .admin-workspace .admin-profile {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .admin-sidebar-backdrop {
+    position: fixed;
+    z-index: 1400;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(8, 8, 7, .58);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility .2s ease;
+  }
+
+  .admin-workspace.admin-sidebar-open .admin-sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .admin-workspace .admin-main {
+    width: 100%;
+    max-width: 100%;
+    padding: max(17px, env(safe-area-inset-top)) var(--nova-mobile-gutter) max(22px, var(--nova-safe-bottom));
+    overflow-x: clip;
+  }
+
+  .admin-workspace .admin-top {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    margin-bottom: 18px;
+  }
+
+  .admin-workspace .admin-menu-toggle {
+    display: inline-flex;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4ded2;
+    background: #fffefa;
+    color: #24211b;
+  }
+
+  .admin-workspace .admin-top-title {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .admin-workspace .admin-top h1 {
+    margin: 4px 0 0;
+    font-size: clamp(24px, 6vw, 30px);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  .admin-workspace .admin-top-actions {
+    flex: 0 0 auto;
+    gap: 8px;
+  }
+
+  .admin-workspace .welcome-strip {
+    gap: 16px;
+    padding: 19px;
+  }
+
+  .admin-workspace .welcome-strip > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .admin-workspace .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-workspace .admin-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-workspace .panel {
+    padding: 14px;
+  }
+
+  .admin-workspace .panel-head,
+  .admin-workspace .management-toolbar,
+  .admin-workspace .management-head-actions {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .admin-workspace .panel-head > *,
+  .admin-workspace .management-toolbar > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .admin-workspace .product-form,
+  .admin-workspace .management-form {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+  }
+
+  .admin-workspace .wide-field,
+  .admin-workspace .management-form-title,
+  .admin-workspace .management-form-actions {
+    grid-column: auto;
+  }
+
+  .admin-workspace .management-form-actions {
+    flex-direction: column;
+  }
+
+  .admin-workspace .management-form-actions button {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .admin-workspace .admin-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .admin-workspace .admin-footer span {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  /* Customer account: the top sign-out action replaces the desktop-only sidebar. */
+  .admin-shell.customer-shell {
+    display: block;
+    min-height: 100svh;
+  }
+
+  .customer-shell .admin-sidebar {
+    display: none;
+  }
+
+  .customer-shell .admin-main {
+    width: 100%;
+    max-width: 100%;
+    padding: max(18px, env(safe-area-inset-top)) var(--nova-mobile-gutter) max(22px, var(--nova-safe-bottom));
+  }
+
+  .customer-shell .admin-top {
+    gap: 12px;
+    align-items: center;
+  }
+
+  .customer-shell .admin-top h1 {
+    font-size: 28px;
+  }
+
+  .customer-shell .welcome-strip {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .customer-shell .panel {
+    padding: 17px;
+    overflow-wrap: anywhere;
+  }
+
+  .customer-shell .customer-order-top,
+  .customer-shell .customer-order-bottom {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .customer-shell .customer-order-bottom {
+    flex-direction: column;
+  }
+
+  /* Security monitoring: keep cards readable and tables contained within scroll areas. */
+  .security-monitor-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .security-monitor-card {
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .security-monitor-card strong {
+    font-size: 27px;
+  }
+
+  .security-monitor-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .security-monitor-toolbar > *,
+  .security-monitor-toolbar .management-search {
+    grid-column: auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .security-monitor-table-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .security-monitor-table-head .management-count {
+    max-width: 100%;
+  }
+
+  .security-audit-table {
+    min-width: 780px;
+  }
+
+  /* Dialogs and forms: fit short viewports, respect mobile safe areas and prevent page zoom. */
+  .overlay {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .cart-drawer {
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding: 19px var(--nova-mobile-gutter) max(18px, var(--nova-safe-bottom));
+  }
+
+  .product-modal {
+    width: calc(100% - 20px);
+    max-width: 560px;
+    max-height: calc(100svh - 20px);
+    margin: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .checkout-overlay {
+    padding: 10px;
+    align-items: center;
+  }
+
+  .checkout-modal {
+    width: 100%;
+    max-width: 620px;
+    max-height: calc(100svh - 20px);
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .checkout-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .checkout-wide {
+    grid-column: auto;
+  }
+
+  .checkout-actions {
+    flex-direction: column-reverse;
+  }
+
+  .checkout-actions button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .login-screen {
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: center;
+    padding: max(64px, env(safe-area-inset-top)) 14px max(20px, var(--nova-safe-bottom));
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 30px clamp(18px, 6vw, 28px);
+  }
+
+  .login-form input,
+  .checkout-fields input,
+  .management-form input,
+  .management-form select,
+  .product-form input,
+  .product-form select,
+  .product-form textarea,
+  .security-monitor-toolbar input,
+  .security-monitor-toolbar select {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .mfa-qr-image {
+    width: min(220px, 64vw);
+  }
+
+  .mfa-code-input {
+    min-height: 50px;
+  }
+
+  .mfa-recovery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Touch devices should not depend on hover-only interactions. */
+  .nova-storefront-3d .category-card:hover,
+  .nova-storefront-3d .product-card:hover,
+  .nova-about-immersive .am-universe-card:hover,
+  .nova-about-immersive .am-value-card:hover {
+    transform: none;
+  }
+
+  .nova-about-immersive .am-cursor-spotlight {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .topbar {
+    gap: 7px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .wordmark {
+    font-size: 24px;
+  }
+
+  .header-actions .icon-button {
+    width: 34px;
+  }
+
+  .hero-copy {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .benefit-bar {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .category-card {
+    height: 155px;
+  }
+
+  .security-monitor-cards {
+    gap: 7px;
+  }
+
+  .security-monitor-card {
+    padding: 10px;
+  }
+
+  .security-monitor-card span {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .security-monitor-card strong {
+    font-size: 24px;
+  }
+
+  .mfa-recovery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 360px) {
+  .products-grid {
+    gap: 10px 7px;
+  }
+
+  .product-info {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .product-name {
+    font-size: 12px;
+  }
+
+  .price-row strong {
+    font-size: 11px;
+  }
+
+  .main-nav.is-open {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .main-nav.is-open .offers-link {
+    grid-column: auto;
+  }
+}
+
+@media (max-height: 520px) and (max-width: 760px) {
+  .am-hero {
+    padding-top: 52px;
+  }
+
+  .am-hero-stage {
+    min-height: 300px;
+  }
+
+  .am-story-sticky {
+    min-height: 520px;
+  }
+
+  .login-screen {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-workspace .admin-sidebar,
+  .admin-sidebar-backdrop,
+  .main-nav.is-open {
+    transition: none !important;
+  }
+}
+
+
+/* NOVA mobile polish: complete story composition and usable wishlist controls. */
+.wishlist-header-button { position: relative; }
+.wishlist-header-button.has-saved { color: #d7b976; }
+.wishlist-header-button .count { font-variant-numeric: tabular-nums; }
+
+.wishlist-drawer { width: min(490px, 100%); }
+.wishlist-items { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.wishlist-item {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 13px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e8e4dc;
+}
+.wishlist-item > img {
+  display: block;
+  width: 88px;
+  height: 98px;
+  object-fit: cover;
+  background: #eeece6;
+}
+.wishlist-item-copy { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; gap: 6px; }
+.wishlist-item-copy > b { color: #27241e; font: 500 15px/1.35 Georgia, serif; overflow-wrap: anywhere; }
+.wishlist-item-copy > strong { color: #27241e; font-size: 13px; }
+.wishlist-item-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 4px; }
+.wishlist-item-actions .button { min-height: 36px; margin: 0; padding: 8px 10px; font-size: 10px; }
+.wishlist-remove { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 7px 8px; border: 1px solid #e7ddd4; background: #fffaf8; color: #9a4b40; font-size: 10px; }
+.modal-wishlist-button { min-height: 44px; border: 1px solid #ded6c7; color: #3b352b; }
+.modal-wishlist-button.is-saved { border-color: #d9b9ae; color: #a34d43; background: #fff4f1; }
+
+@media (max-width: 760px) {
+  .nova-about-immersive .am-hero {
+    min-height: 0;
+    padding: 54px 18px 76px;
+    gap: 0;
+  }
+  .nova-about-immersive .am-hero-copy { width: 100%; max-width: none; }
+  .nova-about-immersive .am-hero h1 {
+    margin: 19px 0 16px;
+    font-size: clamp(54px, 15vw, 70px);
+    line-height: .9;
+  }
+  .nova-about-immersive .am-hero-copy > p { max-width: 100%; font-size: 12px; line-height: 1.75; }
+  .nova-about-immersive .am-hero-actions { gap: 12px; margin-top: 22px; }
+  .nova-about-immersive .am-hero-stage {
+    width: 100%;
+    height: min(102vw, 390px);
+    min-height: 310px;
+    margin: 12px auto 0;
+    overflow: visible;
+  }
+  .nova-about-immersive .am-hero-core { width: min(52vw, 190px); }
+  .nova-about-immersive .am-hero-core span { font-size: clamp(104px, 31vw, 125px); }
+  .nova-about-immersive .am-hero-word { font-size: clamp(100px, 28vw, 150px); }
+  .nova-about-immersive .am-hero-ring { width: min(82vw, 310px); }
+  .nova-about-immersive .am-ring-two { width: min(66vw, 250px); }
+  .nova-about-immersive .am-panel-main { left: 26%; top: 19%; width: 53%; height: 57%; }
+  .nova-about-immersive .am-panel-side {
+    top: 8%; right: 2%; width: 25%; height: 24%;
+    transform: rotateY(12deg) rotateZ(5deg) translateZ(65px);
+  }
+  .nova-about-immersive .am-panel-low {
+    left: 4%; bottom: 6%; width: 31%; height: 27%;
+    transform: rotateY(12deg) rotateZ(-7deg) translateZ(65px);
+  }
+  .nova-about-immersive .am-orbit-label { display: none; }
+  .nova-about-immersive .am-stage-index { right: 4%; bottom: 2%; font-size: 17px; }
+  .wishlist-drawer { padding: 20px var(--nova-mobile-gutter) max(18px, var(--nova-safe-bottom)); }
+  .wishlist-item { grid-template-columns: 76px minmax(0, 1fr); gap: 10px; }
+  .wishlist-item > img { width: 76px; height: 88px; }
+  .wishlist-item-actions .button { flex: 1 1 auto; }
+}
+
+@media (max-width: 390px) {
+  .nova-about-immersive .am-hero { padding-left: 16px; padding-right: 16px; }
+  .nova-about-immersive .am-hero-stage { height: 96vw; min-height: 292px; }
+  .nova-about-immersive .am-panel-main { left: 25%; width: 55%; height: 56%; }
+  .nova-about-immersive .am-panel-side { right: 1%; width: 26%; }
+  .nova-about-immersive .am-panel-low { left: 2%; width: 33%; }
+}

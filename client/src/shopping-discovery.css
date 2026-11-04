@@ -1,0 +1,222 @@
+/* NOVA Market — customer product discovery controls */
+.discovery-tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.discovery-filter-toggle {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid #d9d3c7;
+    background: #fbfaf6;
+    color: #514b40;
+    font-size: 11px;
+    font-weight: 650;
+    transition: border-color .18s ease, background .18s ease, color .18s ease;
+}
+
+.discovery-filter-toggle:hover,
+.discovery-filter-toggle.is-active {
+    border-color: #b9985b;
+    background: #f8f1e4;
+    color: #6c5127;
+}
+
+.discovery-filter-toggle > svg:last-child {
+    transition: transform .18s ease;
+}
+
+.discovery-filter-toggle > svg:last-child.is-rotated {
+    transform: rotate(180deg);
+}
+
+.discovery-filter-count {
+    min-width: 18px;
+    height: 18px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #c4a05c;
+    color: #211d15;
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.discovery-sort-label {
+    color: #8c8375;
+    font-size: 10px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.discovery-filters {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    align-items: end;
+    gap: 12px;
+    margin: 14px 0 10px;
+    padding: 16px;
+    border: 1px solid #e5dfd5;
+    background: #fffefa;
+    box-shadow: 0 8px 24px rgba(35, 30, 20, .045);
+    animation: discovery-filter-in .2s ease both;
+}
+
+.discovery-filter-field {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    color: #71695e;
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.discovery-filter-field select {
+    width: 100%;
+    min-width: 0;
+    min-height: 41px;
+    padding: 0 10px;
+    border: 1px solid #e1dbd0;
+    border-radius: 0;
+    outline-color: #b9985b;
+    background: #fff;
+    color: #39352e;
+    font-family: inherit;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.discovery-stock-option {
+    min-height: 41px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 3px;
+    color: #514b40;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.discovery-stock-option input {
+    width: 17px;
+    height: 17px;
+    accent-color: #b18a48;
+}
+
+.discovery-clear-button,
+.discovery-results-meta button {
+    border: 0;
+    padding: 8px 4px;
+    background: transparent;
+    color: #9a7437;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+}
+
+.discovery-results-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 30px;
+    margin: 10px 0 16px;
+    color: #8b8478;
+    font-size: 11px;
+}
+
+.discovery-results-meta strong {
+    color: #38342d;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+@keyframes discovery-filter-in {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+    .discovery-tools {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .discovery-filter-toggle,
+    .discovery-tools .sort-select {
+        width: 100%;
+        min-width: 0;
+        min-height: 42px;
+    }
+
+    .discovery-tools .sort-select {
+        justify-content: space-between;
+        gap: 6px;
+        padding: 8px 9px;
+    }
+
+    .discovery-tools .sort-select select {
+        flex: 1;
+        width: 1px;
+        min-width: 0;
+        max-width: none;
+        font-size: 10px;
+    }
+
+    .discovery-filters {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 9px;
+        padding: 12px;
+    }
+
+    .discovery-stock-option {
+        white-space: normal;
+        font-size: 10px;
+    }
+
+    .discovery-clear-button {
+        justify-self: end;
+        align-self: center;
+    }
+
+    .discovery-results-meta {
+        align-items: flex-start;
+        margin: 10px 0 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .discovery-tools,
+    .discovery-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .discovery-tools .sort-select {
+        justify-content: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .discovery-filters,
+    .discovery-filter-toggle,
+    .discovery-filter-toggle > svg:last-child {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,31 @@
+/* Owner-only administrator deletion controls */
+.management-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.management-row-actions .management-toggle,
+.management-row-actions .management-delete {
+  min-height: 36px;
+  white-space: nowrap;
+}
+.management-row-actions .management-delete {
+  color: #a84336;
+  border-color: rgba(168, 67, 54, .22);
+  background: #fffaf8;
+}
+.management-row-actions .management-delete:hover:not(:disabled) {
+  color: #7f2d24;
+  border-color: rgba(168, 67, 54, .45);
+  background: #fff0ed;
+}
+.management-row-actions .management-delete:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+@media (max-width: 720px) {
+  .management-row-actions { align-items: stretch; }
+  .management-row-actions button { width: 100%; justify-content: center; }
+}

@@ -1,0 +1,60 @@
+
+/* NOVA Market administrator two-factor setup */
+.mfa-setup-panel {
+    display: grid;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #e6dfd1;
+    background: #fbf9f4;
+    color: #27241e;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.mfa-setup-panel p { margin: 0; color: #6d675b; }
+.mfa-key-label { color: #8b6a2e; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.mfa-secret-key {
+    display: block;
+    overflow-wrap: anywhere;
+    padding: 13px;
+    border: 1px dashed #c6a15b;
+    background: #fff;
+    color: #171715;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-align: center;
+    user-select: all;
+}
+.mfa-copy-button { justify-self: start; }
+.mfa-helper { font-size: 11px; }
+.mfa-code-input { letter-spacing: .16em; text-align: center; font-size: 20px !important; font-weight: 700 !important; }
+.mfa-recovery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.mfa-recovery-grid code { padding: 10px 7px; background: #fff; border: 1px solid #e4deD2; text-align: center; color: #211e18; font-weight: 700; letter-spacing: .06em; user-select: all; }
+@media (max-width: 520px) { .mfa-recovery-grid { grid-template-columns: 1fr; } }
+
+
+/* Locally generated authenticator QR. It contains the private TOTP seed. */
+.mfa-qr-wrap {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 4px auto 8px;
+    padding: 12px;
+    border: 1px solid #e6dfd1;
+    background: #fff;
+    border-radius: 12px;
+}
+.mfa-qr-image {
+    display: block;
+    width: min(240px, 65vw);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    image-rendering: pixelated;
+}
+.mfa-qr-wrap span {
+    color: #6d675b;
+    font-size: 11px;
+    text-align: center;
+}
