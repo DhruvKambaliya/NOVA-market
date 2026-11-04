@@ -16,7 +16,10 @@ import './product-gallery.css';
 import './shopping-discovery.css';
 import './product-search.css';
 
-const API_BASE_URL = String(import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000').replace(/\/+$/, '');
+const API_BASE_URL = String(
+    import.meta.env.VITE_API_BASE_URL ??
+    (import.meta.env.DEV ? 'http://localhost:4000' : '')
+).replace(/\/+$/, '');
 
 const initialProducts = [
     { id: 1, name: 'Studio Wireless Headphones', category: 'Electronics', price: 2999, oldPrice: 3999, rating: 4.8, reviews: 128, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85', tag: 'BESTSELLER', description: 'Immersive sound, soft-touch comfort and a beautifully minimal finish.' },
@@ -1501,7 +1504,7 @@ function AdminSecurityMonitoringPanel() {
     const now = Date.now();
     const cutoff = timeFilter === '24h' ? now - 24 * 60 * 60 * 1000
         : timeFilter === '7d' ? now - 7 * 24 * 60 * 60 * 1000
-        : timeFilter === '30d' ? now - 30 * 24 * 60 * 60 * 1000 : 0;
+            : timeFilter === '30d' ? now - 30 * 24 * 60 * 60 * 1000 : 0;
     const inRange = item => {
         const timestamp = Date.parse(item.timestamp || '');
         return Number.isFinite(timestamp) && timestamp >= cutoff && timestamp <= now + 60_000;
@@ -1560,11 +1563,11 @@ function AdminSecurityMonitoringPanel() {
             )}
 
             <div className="security-monitor-cards">
-                <div className="security-monitor-card"><span><KeyRound size={17}/> Failed logins</span><strong>{failedLogins}</strong><small>Selected time period</small></div>
-                <div className="security-monitor-card"><span><ShieldAlert size={17}/> MFA failures</span><strong>{mfaFailures}</strong><small>Authenticator / recovery failures</small></div>
-                <div className="security-monitor-card"><span><ShieldCheck size={17}/> Suspicious alerts</span><strong>{suspiciousAlerts}</strong><small>Detected sign-in patterns</small></div>
-                <div className="security-monitor-card"><span><Activity size={17}/> Admin actions</span><strong>{adminActions}</strong><small>Account and permission changes</small></div>
-                <div className="security-monitor-card"><span><LockKeyhole size={17}/> Active blocks</span><strong>{activeBlocks.length}</strong><small>Persistent temporary blocks</small></div>
+                <div className="security-monitor-card"><span><KeyRound size={17} /> Failed logins</span><strong>{failedLogins}</strong><small>Selected time period</small></div>
+                <div className="security-monitor-card"><span><ShieldAlert size={17} /> MFA failures</span><strong>{mfaFailures}</strong><small>Authenticator / recovery failures</small></div>
+                <div className="security-monitor-card"><span><ShieldCheck size={17} /> Suspicious alerts</span><strong>{suspiciousAlerts}</strong><small>Detected sign-in patterns</small></div>
+                <div className="security-monitor-card"><span><Activity size={17} /> Admin actions</span><strong>{adminActions}</strong><small>Account and permission changes</small></div>
+                <div className="security-monitor-card"><span><LockKeyhole size={17} /> Active blocks</span><strong>{activeBlocks.length}</strong><small>Persistent temporary blocks</small></div>
             </div>
 
             {error && <p className="login-error" role="alert">{error}</p>}
@@ -1586,7 +1589,7 @@ function AdminSecurityMonitoringPanel() {
                 )}
             </section>
 
-            <div className="security-monitor-table-head"><div><h4>Recent security events</h4><p>Showing {filtered.length} of {rangeLogs.length} events in the selected period.</p></div><span className="management-count"><ShieldCheck size={17}/><strong>{rangeLogs.length}</strong><span>loaded events</span></span></div>
+            <div className="security-monitor-table-head"><div><h4>Recent security events</h4><p>Showing {filtered.length} of {rangeLogs.length} events in the selected period.</p></div><span className="management-count"><ShieldCheck size={17} /><strong>{rangeLogs.length}</strong><span>loaded events</span></span></div>
             {loading ? <p>Loading security activity…</p> : filtered.length === 0 ? (
                 <div className="empty-orders"><ShieldCheck size={28} /><p>{rangeLogs.length ? 'No security events match these filters.' : 'No security events recorded in this period.'}</p></div>
             ) : (
@@ -2151,42 +2154,42 @@ function ProductTable({ products, onEdit, onDelete, deletingProductId }) {
                         const lowStock = stock !== null && stock <= 5;
 
                         return (
-                        <tr key={p.id}>
-                            <td>
-                                <div className="table-product">
-                                    <img src={p.image || 'https://placehold.co/900x900?text=NOVA+Product'} alt="" />
-                                    <b>{p.name}</b>
-                                </div>
-                            </td>
-                            <td>{p.category}</td>
-                            <td>{money(p.price)}</td>
-                            <td>{stock === null ? '—' : stock}</td>
-                            <td>
-                                <span className={'status ' + (lowStock ? 'pending' : 'delivered')}>
-                                    {stock === null ? 'Not set' : lowStock ? 'Low stock' : 'Active'}
-                                </span>
-                            </td>
-                            <td>
-                                <button
-                                    className="table-action"
-                                    title="Edit product"
-                                    aria-label={`Edit ${p.name}`}
-                                    onClick={() => onEdit?.(p)}
-                                    disabled={Boolean(deletingProductId)}
-                                >
-                                    <Pencil size={15} />
-                                </button>
-                                <button
-                                    className="table-action danger"
-                                    title="Delete product"
-                                    aria-label={`Delete ${p.name}`}
-                                    onClick={() => onDelete?.(p)}
-                                    disabled={String(deletingProductId) === String(p.id)}
-                                >
-                                    {String(deletingProductId) === String(p.id) ? '…' : <Trash2 size={15} />}
-                                </button>
-                            </td>
-                        </tr>
+                            <tr key={p.id}>
+                                <td>
+                                    <div className="table-product">
+                                        <img src={p.image || 'https://placehold.co/900x900?text=NOVA+Product'} alt="" />
+                                        <b>{p.name}</b>
+                                    </div>
+                                </td>
+                                <td>{p.category}</td>
+                                <td>{money(p.price)}</td>
+                                <td>{stock === null ? '—' : stock}</td>
+                                <td>
+                                    <span className={'status ' + (lowStock ? 'pending' : 'delivered')}>
+                                        {stock === null ? 'Not set' : lowStock ? 'Low stock' : 'Active'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button
+                                        className="table-action"
+                                        title="Edit product"
+                                        aria-label={`Edit ${p.name}`}
+                                        onClick={() => onEdit?.(p)}
+                                        disabled={Boolean(deletingProductId)}
+                                    >
+                                        <Pencil size={15} />
+                                    </button>
+                                    <button
+                                        className="table-action danger"
+                                        title="Delete product"
+                                        aria-label={`Delete ${p.name}`}
+                                        onClick={() => onDelete?.(p)}
+                                        disabled={String(deletingProductId) === String(p.id)}
+                                    >
+                                        {String(deletingProductId) === String(p.id) ? '…' : <Trash2 size={15} />}
+                                    </button>
+                                </td>
+                            </tr>
                         );
                     })}
                 </tbody>
